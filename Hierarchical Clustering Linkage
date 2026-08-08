@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import dendrogram, linkage
+from sklearn.metrics import pairwise_distances
+# Sample data
+data = np.array([
+    [1.0, 1.1],
+    [1.5, 1.8],
+    [5.0, 8.0],
+    [8.0, 8.0],
+    [1.0, 0.6],
+    [9.0, 11.0]
+])
+# Proximity Matrix
+pm = pairwise_distances(data)
+print("Proximity Matrix:")
+print(pm)
+# Single Linkage
+plt.figure(figsize=(6,4))
+dendrogram(linkage(data, method='single'))
+plt.title("Dendrogram - Single Linkage")
+plt.xlabel("Data Points")
+plt.ylabel("Distance")
+plt.show()
+# Complete Linkage
+plt.figure(figsize=(6,4))
+dendrogram(linkage(data, method='complete'))
+plt.title("Dendrogram - Complete Linkage")
+plt.xlabel("Data Points")
+plt.ylabel("Distance")
+plt.show()
