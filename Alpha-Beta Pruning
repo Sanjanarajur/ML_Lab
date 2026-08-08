@@ -1,0 +1,26 @@
+def alphabeta(depth, node, alpha, beta, is_max, values):
+    if depth == 3:
+        return values[node]
+    if is_max:
+        best = -999
+        for i in range(2):
+            best = max(best,
+                       alphabeta(depth+1, node*2+i,
+                                 alpha, beta, False, values))
+            alpha = max(alpha, best)
+            if beta <= alpha:
+                break
+        return best
+    else:
+        best = 999
+        for i in range(2):
+            best = min(best,
+                       alphabeta(depth+1, node*2+i,
+                                 alpha, beta, True, values))
+            beta = min(beta, best)
+            if beta <= alpha:
+                break
+        return best
+values = [3, 5, 6, 9, 1, 2, 0, -1]
+print("Optimal Value:",
+      alphabeta(0, 0, -999, 999, True, values))
