@@ -1,0 +1,35 @@
+def hill_climbing(graph, start, goal, heuristic):
+    current = start
+    path = [current]
+    while current != goal:
+        neighbors = graph.get(current, [])
+        if not neighbors:
+            return path
+        next_node = min(neighbors, key=lambda x: heuristic[x])
+        if heuristic[next_node] >= heuristic[current]:
+            return path
+        current = next_node
+        path.append(current)
+    return path
+# Graph
+graph = {
+    'A': ['B', 'C', 'D'],
+    'B': ['A', 'E'],
+    'C': ['A', 'E'],
+    'D': ['A', 'F'],
+    'E': ['B', 'C', 'G'],
+    'F': ['D', 'G'],
+    'G': []
+}
+# Heuristic values
+heuristic = {
+    'A': 40,
+    'B': 32,
+    'C': 25,
+    'D': 35,
+    'E': 19,
+    'F': 17,
+    'G': 0
+}
+path = hill_climbing(graph, 'A', 'G', heuristic)
+print("Path:", path)
