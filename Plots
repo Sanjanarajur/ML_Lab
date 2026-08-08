@@ -1,0 +1,52 @@
+#scatter plot
+'''
+import matplotlib.pyplot as plt
+students= [1,2,3,4,5]
+marks=[50,60,70,80,90]
+plt.scatter(students,marks)
+plt.xlabel("students")
+plt.ylabel("marks")
+plt.title("scatter plot")
+plt.show()
+'''
+#box plot
+'''
+import matplotlib.pyplot as plt
+marks=[40,50,60,70,80,90]
+plt.boxplot(marks)
+plt.title("box plot")
+plt.show()
+'''
+#heat map
+'''
+import seaborn as sns
+import matplotlib.pyplot as plt
+data= [[1,2,3],[4,5,6],[7,8,9]]
+sns.heatmap (data,annot = True)
+plt.title("heatmap")
+plt.show()
+'''
+#coutour plot
+'''
+import numpy as np
+import matplotlib.pyplot as plt
+X = np.linspace(1,10,10)
+Y = np.linspace(1,10,10)
+X,Y = np.meshgrid(X,Y)
+Z = X+Y
+plt.contour(X,Y,Z)
+plt.title("counter plot")
+plt.show()
+'''
+#3d surface
+import numpy as np
+import matplotlib.pyplot as plt
+X = np.linspace(1,5,10)
+Y = np.linspace(1,5,10)
+X,Y = np.meshgrid(X,Y)
+Z = X*Y
+fig = plt.figure()
+ax= fig.add_subplot(111,projection="3d")
+ax.plot_surface(X,Y,Z)
+plt.title("3d surface")
+plt.show()
