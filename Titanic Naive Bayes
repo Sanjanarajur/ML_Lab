@@ -1,0 +1,26 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, confusion_matrix
+# Load Titanic dataset
+data = pd.read_csv("titanic.csv")
+# Handle missing values
+data['Age'].fillna(data['Age'].median(), inplace=True)
+data['Fare'].fillna(data['Fare'].median(), inplace=True)
+data['Embarked'].fillna(data['Embarked'].mode()[0], inplace=True)
+# Convert categorical values
+data['Embarked'] = data['Embarked'].map({'C':0, 'Q':1, 'S':2})
+# Features and target
+X = data[['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']]
+y = data['Survived']
+# 90-10 and 70-30 splits
+for test_size in [0.1, 0.3]:
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size, random_state=42)
+    model = GaussianNB()
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    print(f"\nSplit {(1-test_size)*100:.0f}-{test_size*100:.0f}")
+    print("Accuracy =", accuracy_score(y_test, y_pred))
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_pred))
